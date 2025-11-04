@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+/* Enable class-based dark mode in Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Ensure the app can fill the viewport */
+html, body, #root { height: 100%; }
+
+
+
+.hfx-photo:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
