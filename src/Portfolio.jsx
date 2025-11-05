@@ -773,7 +773,7 @@ const App = () => {
              transition-transform duration-500 ease-in-out hover:scale-[1.03]" // <-- ADDED HOVER ANIMATION
 >
   <img 
-    src="/profile.jpg" 
+    src="./profile.jpg" 
     alt="Profile Picture" 
     className="rounded-full w-full h-full object-cover" 
   />
@@ -1009,7 +1009,7 @@ const Experience = React.memo(() => (
                 
                 {/* NEW: Download Resume Button */}
                 <a
-                  href="/files/Resume - Kelvin Chow.pdf" 
+                  href="./Resume - Kelvin Chow.pdf" 
                   download="Resume - Kelvin Chow.pdf"
                   className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold bg-violet-600/90 dark:bg-emerald-600/80 text-white rounded-full shadow-lg hover:bg-violet-500/90 dark:hover:bg-emerald-500/90 transition duration-300 transform hover:scale-[1.02] active:scale-95 shadow-violet-500/50 dark:shadow-emerald-500/50 border border-violet-500/50 dark:border-emerald-500/50 backdrop-blur-sm"
                 >
