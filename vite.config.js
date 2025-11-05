@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // 💡 IMPORTANT: Replace 'REPOSITORY-NAME' with your actual GitHub repository name, 
 // including the leading and trailing slashes. E.g., '/kelvin-portfolio/'
-const repositoryName = '/https://github.com/kelvinchow2003/Kelvins-Website-2025-NAME/' 
+const repositoryName = '/Kelvins-Website-2025/'
 
 export default defineConfig({
   // --- ADDED THIS LINE ---
