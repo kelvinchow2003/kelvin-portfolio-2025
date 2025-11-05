@@ -69,25 +69,26 @@ const projectsData = [
     title: "Laptop Configuration Automation",
     description: "Developed a PowerShell-based solution to streamline pre-domain setup for Windows 11 desktops and laptops. Automated critical tasks like system configuration, updates, firewall management, and application deployment, reducing manual setup time.",
     tags: ["PowerShell", "Automation", "Windows", "IT Operations"],
-    githubUrl: "#",
+    githubUrl: "https://github.com/kelvinchow2003/IT_Automation",
     liveUrl: "#"
   },
   {
     id: 3,
-    title: "AI-Powered Financial Modeler (Mock)",
-    description: "Mock project showcasing full-stack application leveraging a powerful LLM API for real-time market analysis and structured data generation. Demonstrates skills in modern full-stack development and cloud integration.",
-    tags: ["React", "TypeScript", "LLM API", "Firestore", "Tailwind CSS"],
-    githubUrl: "#",
+    title: "Real-Time Collaborative Editor (Mock)",
+    description: "Creates Kiosk for windows computers that limits access to a landing page.",
+    tags: ["Powershell, HTML, Windows, Logon Expert"],
+    githubUrl: "https://github.com/kelvinchow2003/Kiosk_Setup",
     liveUrl: "#"
   },
   {
     id: 4,
-    title: "Real-Time Collaborative Editor (Mock)",
-    description: "Mock project demonstrating CRDT implementation using WebSockets for real-time collaboration across multiple users without data loss, highlighting proficiency in backend concurrency and data structures.",
-    tags: ["Node.js", "WebSockets", "CRDT", "MongoDB", "React"],
-    githubUrl: "#",
+    title: "Falling Trend Stock ETL",
+    description: "Fetches high volume major top stocks as recommendations for purchasing.",
+    tags: ["Python, API"],
+    githubUrl: "https://github.com/kelvinchow2003/Stock_ETL",
     liveUrl: "#"
-  }
+  },
+  
 ];
 
 const experienceData = [
@@ -97,7 +98,7 @@ const experienceData = [
     title: "System Support Engineer",
     company: "Toronto Parking Authority (GreenP)",
     details: "Delivered L1, L2, and L3 technical support, assisted with cybersecurity (CrowdStrike, Symantec), and developed automation scripts (Intune, PowerShell) to streamline system configuration and improve operational efficiency. Participated in AI-driven customer support solutions (Co-pilot, Power Apps).",
-    logoUrl: "https://placehold.co/60x60/10b981/ffffff?text=TPA" // Placeholder URL for TPA
+    logoUrl: "./TPA.png" // Placeholder URL for TPA
   },
   {
     id: 2,
@@ -105,7 +106,7 @@ const experienceData = [
     title: "Junior Developer",
     company: "Green and Spiegel LLP",
     details: "Designed and implemented a secure client intake web portal (AWS, Rest API) and automated dynamic PDF generation using SQL, Python, and Java, which reduced manual workload by 53%. Contributed to code optimization through thorough code reviews.",
-    logoUrl: "https://placehold.co/60x60/10b981/ffffff?text=G&S" // Placeholder URL for Green and Spiegel
+    logoUrl: "./Gands.png" // Placeholder URL for Green and Spiegel
   },
   {
     id: 3,
@@ -113,7 +114,7 @@ const experienceData = [
     title: "Information Technology Co-op",
     company: "Bothwell Accurate Co. Inc.",
     details: "Provided comprehensive technical support (resolving over 200 issues) and automated onboarding processes for new employees by developing and deploying robust shell scripts, significantly streamlining IT operations.",
-    logoUrl: "https://placehold.co/60x60/10b981/ffffff?text=BA" // Placeholder URL for Bothwell Accurate
+    logoUrl: "./Bothwell.png" // Placeholder URL for Bothwell Accurate
   },
   {
     id: 4,
@@ -121,7 +122,7 @@ const experienceData = [
     title: "Bachelors of Science Computer Science Co-op",
     company: "Toronto Metropolitan University",
     details: "Engaged in advanced coursework and projects in algorithms, data structures, machine learning, and software development. Collaborated on team projects using Agile methodologies and version control (Git).",
-    logoUrl: "https://placehold.co/60x60/10b981/ffffff?text=BA" // Placeholder URL for TMU
+    logoUrl: "./TMU.png" // Placeholder URL for TMU
   },
   {
     id: 5,
@@ -129,7 +130,7 @@ const experienceData = [
     title: "Aquatic Supervisor II",
     company: "City Of Markham",
     details: "Managed aquatic safety operations, supervised staff, and ensured compliance with health and safety regulations at community pools. Developed leadership and crisis management skills in a dynamic environment.",
-    logoUrl: "https://placehold.co/60x60/10b981/ffffff?text=BA" // Placeholder URL for City of Markham
+    logoUrl: "./markham.png" // Placeholder URL for City of Markham
   },
 ];
 
@@ -238,7 +239,7 @@ const ProjectModal = ({ project, onClose, isDark }) => {
         },
     };
 
-    const apiKey = "";
+    const apiKey = "AIzaSyDEJ_43E-5MxHXo52KhSM66g6ieHcZd0_A";
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
     let response = null;
@@ -296,7 +297,7 @@ const ProjectModal = ({ project, onClose, isDark }) => {
       onClick={onClose}
     >
       <div
-        // UPDATED: More pronounced backdrop blur for the modal
+        
         className="relative w-full max-w-4xl p-8 bg-white/10 dark:bg-gray-800/90 rounded-2xl shadow-2xl transform scale-95 md:scale-100 transition-transform duration-300 border border-violet-500/30 dark:border-emerald-500/30 backdrop-blur-2xl"
         onClick={(e) => e.stopPropagation()} 
       >
@@ -560,7 +561,7 @@ const AiAssistantDemo = ({ isDark }) => {
   const accentColor = isDark ? 'emerald' : 'violet';
 
   return (
-    // UPDATED: Increased Blur/Transparency for Glassmorphism
+    
     <div className="p-8 **bg-white/50** dark:bg-gray-900/40 rounded-xl shadow-xl space-y-6 border border-gray-200 dark:border-gray-700/20 **backdrop-blur-xl**">
       <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
         <Aperture className={`mr-3 text-${accentColor}-600`} size={24} />
@@ -623,7 +624,7 @@ const AiAssistantDemo = ({ isDark }) => {
 // --- MAIN APP COMPONENT ---
 
 const App = () => {
-  // Start in dark mode as requested
+  
   const [isDark, setIsDark] = useState(true); 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -650,13 +651,13 @@ const App = () => {
     { name: "Contact", href: "#contact" },
   ];
 
-  // Smooth scroll handler - STABILIZED WITH useCallback
+  
   const scrollToSection = useCallback((id) => {
     const element = document.getElementById(id.substring(1));
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    // Use stable setter form
+   
     setIsMenuOpen(false); 
   }, []);
 
@@ -797,7 +798,7 @@ const About = React.memo(() => (
     <Section id="about" title="About Me">
       <div className="grid lg:grid-cols-2 gap-12 text-lg">
         
-        {/* UPDATED: Added hover effects to the first card */}
+        {/* Added hover effects to the first card */}
         <div className="p-6 bg-white/50 dark:bg-gray-900/40 rounded-xl 
              border border-gray-200 dark:border-gray-700/20 
              shadow-xl dark:shadow-2xl backdrop-blur-xl 
@@ -813,7 +814,7 @@ const About = React.memo(() => (
           </p>
         </div>
 
-        {/* UPDATED: Added hover effects to the second card */}
+        {/*Added hover effects to the second card */}
         <div className="p-6 bg-white/50 dark:bg-gray-900/40 rounded-xl 
              border border-gray-200 dark:border-gray-700/20 
              shadow-xl dark:shadow-2xl backdrop-blur-xl 
