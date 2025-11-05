@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/kelvinchow2003/Kelvins-Website",
+  "homepage": "https://github.com/kelvinchow2003/Kelvins-Website-2025",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
