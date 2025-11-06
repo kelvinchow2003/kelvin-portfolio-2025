@@ -61,7 +61,7 @@ const projectsData = [
     title: "Income Prediction Model",
     description: "Built income classification models using the Adult Income dataset with 5 ML algorithms (SVM, Logistic Regression, etc.). Handled data cleaning, scaling, and feature selection (RFE). Achieved 84% accuracy with SVM.",
     tags: ["Machine Learning", "Python", "Scikit-learn", "Pandas", "Data Mining"],
-    githubUrl: "https://kelvinchow2003.github.io/Kelvin/", 
+    githubUrl: "https://github.com/kelvinchow2003/Adult_Incone_Prediction", 
     liveUrl: "#"
   },
   {
@@ -74,8 +74,8 @@ const projectsData = [
   },
   {
     id: 3,
-    title: "Real-Time Collaborative Editor (Mock)",
-    description: "Creates Kiosk for windows computers that limits access to a landing page.",
+    title: "Kiosk Lockdown Configurator",
+    description: "Creates and configures secure Kiosk mode for Windows computers, limiting user access to a single landing page and enforcing application security via tools like Logon Expert. Implemented using PowerShell and HTML for a streamlined deployment.",
     tags: ["Powershell, HTML, Windows, Logon Expert"],
     githubUrl: "https://github.com/kelvinchow2003/Kiosk_Setup",
     liveUrl: "#"
@@ -98,7 +98,7 @@ const experienceData = [
     title: "System Support Engineer",
     company: "Toronto Parking Authority (GreenP)",
     details: "Delivered L1, L2, and L3 technical support, assisted with cybersecurity (CrowdStrike, Symantec), and developed automation scripts (Intune, PowerShell) to streamline system configuration and improve operational efficiency. Participated in AI-driven customer support solutions (Co-pilot, Power Apps).",
-    logoUrl: "./TPA.png" // Placeholder URL for TPA
+    logoUrl: "./TPA.png" 
   },
   {
     id: 2,
@@ -106,7 +106,7 @@ const experienceData = [
     title: "Junior Developer",
     company: "Green and Spiegel LLP",
     details: "Designed and implemented a secure client intake web portal (AWS, Rest API) and automated dynamic PDF generation using SQL, Python, and Java, which reduced manual workload by 53%. Contributed to code optimization through thorough code reviews.",
-    logoUrl: "./Gands.png" // Placeholder URL for Green and Spiegel
+    logoUrl: "./Gands.png" 
   },
   {
     id: 3,
@@ -114,7 +114,7 @@ const experienceData = [
     title: "Information Technology Co-op",
     company: "Bothwell Accurate Co. Inc.",
     details: "Provided comprehensive technical support (resolving over 200 issues) and automated onboarding processes for new employees by developing and deploying robust shell scripts, significantly streamlining IT operations.",
-    logoUrl: "./Bothwell.png" // Placeholder URL for Bothwell Accurate
+    logoUrl: "./Bothwell.png" 
   },
   {
     id: 4,
@@ -122,7 +122,7 @@ const experienceData = [
     title: "Bachelors of Science Computer Science Co-op",
     company: "Toronto Metropolitan University",
     details: "Engaged in advanced coursework and projects in algorithms, data structures, machine learning, and software development. Collaborated on team projects using Agile methodologies and version control (Git).",
-    logoUrl: "./TMU.png" // Placeholder URL for TMU
+    logoUrl: "./TMU.png" 
   },
   {
     id: 5,
@@ -130,7 +130,7 @@ const experienceData = [
     title: "Aquatic Supervisor II",
     company: "City Of Markham",
     details: "Managed aquatic safety operations, supervised staff, and ensured compliance with health and safety regulations at community pools. Developed leadership and crisis management skills in a dynamic environment.",
-    logoUrl: "./markham.png" // Placeholder URL for City of Markham
+    logoUrl: "./markham.png" 
   },
 ];
 
