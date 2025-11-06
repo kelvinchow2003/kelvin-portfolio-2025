@@ -163,7 +163,6 @@ const LinkedIn = React.memo(({ size = 24, className = "" }) => (
 
 /**
  * Reusable Section Wrapper - MEMOIZED
- * MODIFIED: Added 'animate-float' class to the content div for the continuous floating effect.
  */
 const Section = React.memo(({ id, children, title }) => {
   // Setup intersection observer hook
@@ -187,8 +186,8 @@ const Section = React.memo(({ id, children, title }) => {
     >
       {/* Apply animation to the content wrapper */}
       <div className={`max-w-7xl mx-auto w-full ${animationClasses}`}> 
-        {/* Header gradient flips from Purple (light) to Emerald (dark) */}
-        <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 sm:mb-10 text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-indigo-600 dark:from-emerald-400 dark:to-cyan-500 tracking-tight transition-colors duration-500">
+        {/* Header gradient: Dark Grey (light) to Emerald/Cyan (dark) */}
+        <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 sm:mb-10 text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-gray-900 dark:from-emerald-400 dark:to-cyan-500 tracking-tight transition-colors duration-500">
           {title}
         </h2>
         {children}
@@ -212,15 +211,14 @@ const ProjectModal = ({ project, onClose, isDark }) => {
   // Define color classes based on the current mode
   const tagClasses = isDark
     ? "px-3 py-1 text-sm font-medium text-emerald-300 bg-emerald-900/40 rounded-full border border-emerald-700/50"
-    : "px-3 py-1 text-sm font-medium text-indigo-700 bg-indigo-100/80 rounded-full border border-indigo-500/50";
+    : "px-3 py-1 text-sm font-medium text-gray-700 bg-gray-100/80 rounded-full border border-gray-400/50"; // MODIFIED: Changed light mode tag to grey/white
     
   const buttonDark = "flex items-center space-x-2 px-6 py-3 bg-gray-700/50 text-white rounded-full hover:bg-gray-600/70 transition duration-200 border border-gray-600/50 backdrop-blur-sm";
   const buttonLight = "flex items-center space-x-2 px-6 py-3 bg-gray-900/80 text-white rounded-full hover:bg-gray-800/90 transition duration-200 border border-gray-800/50 backdrop-blur-sm";
   const llmButtonClass = `flex items-center space-x-2 px-6 py-3 font-semibold rounded-full transition duration-300 transform hover:scale-[1.02] active:scale-95 backdrop-blur-sm 
     ${isDark 
-      ? 'bg-cyan-700/70 text-white hover:bg-cyan-600/80 shadow-cyan-500/30 border border-cyan-500/50' 
-      : 'bg-indigo-700/70 text-white hover:bg-indigo-600/80 shadow-indigo-500/30 border border-indigo-500/50'}`;
-
+      ? 'bg-emerald-700/70 text-white hover:bg-emerald-600/80 shadow-emerald-500/30 border border-emerald-500/50' 
+      : 'bg-emerald-700/70 text-white hover:bg-emerald-600/80 shadow-emerald-500/30 border border-emerald-500/50'}`; // MODIFIED: Both modes use Emerald
 
   const generateProjectInsight = async () => {
     setInsightLoading(true);
@@ -301,12 +299,12 @@ const ProjectModal = ({ project, onClose, isDark }) => {
     >
       <div
         // **MOBILE FIX: Use smaller padding on the modal content on mobile**
-        className="relative w-full max-w-4xl p-6 sm:p-8 bg-white/10 dark:bg-gray-800/90 rounded-2xl shadow-2xl transform scale-95 md:scale-100 transition-transform duration-300 border border-violet-500/30 dark:border-emerald-500/30 backdrop-blur-2xl"
+        className="relative w-full max-w-4xl p-6 sm:p-8 bg-white/10 dark:bg-gray-800/90 rounded-2xl shadow-2xl transform scale-95 md:scale-100 transition-transform duration-300 border border-gray-400/30 dark:border-emerald-500/30 backdrop-blur-2xl" // MODIFIED: Changed light mode border to grey
         onClick={(e) => e.stopPropagation()} 
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white dark:text-gray-900 hover:text-emerald-400 dark:hover:text-indigo-600 transition"
+          className="absolute top-4 right-4 text-white dark:text-gray-900 hover:text-emerald-400 dark:hover:text-emerald-600 transition" // MODIFIED: Changed dark hover
           aria-label="Close modal"
         >
           <X size={24} />
@@ -359,7 +357,7 @@ const ProjectModal = ({ project, onClose, isDark }) => {
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 px-6 py-3 bg-violet-600/80 dark:bg-emerald-600/70 text-white font-semibold rounded-full hover:bg-violet-500/90 dark:hover:bg-emerald-500/80 transition duration-200 border border-violet-500/50 dark:border-emerald-500/50 backdrop-blur-sm"
+            className="flex items-center space-x-2 px-6 py-3 bg-emerald-600/80 dark:bg-emerald-600/70 text-white font-semibold rounded-full hover:bg-emerald-500/90 dark:hover:bg-emerald-500/80 transition duration-200 border border-emerald-500/50 dark:border-emerald-500/50 backdrop-blur-sm" // MODIFIED: Both modes use Emerald
           >
             <Link size={20} />
             <span>View Live</span>
@@ -379,7 +377,8 @@ const TtsPlayer = React.memo(({ text, voice, isDark }) => {
     const [error, setError] = useState(null);
     const audioRef = useRef(null);
     
-    const accentColor = isDark ? 'emerald' : 'violet';
+    // MODIFIED: Accent color is now always emerald
+    const accentColor = 'emerald'; 
 
     const playAudio = async () => {
         if (audioUrl) {
@@ -562,7 +561,8 @@ const AiAssistantDemo = ({ isDark }) => {
     setLoading(false);
   };
 
-  const accentColor = isDark ? 'emerald' : 'violet';
+  // MODIFIED: Accent color is now always emerald
+  const accentColor = 'emerald'; 
 
   return (
     
@@ -572,8 +572,8 @@ const AiAssistantDemo = ({ isDark }) => {
                    border border-gray-200 dark:border-gray-700/20 backdrop-blur-xl 
                    h-full flex flex-col justify-between 
                    transition duration-300 
-                   hover:shadow-violet-500/30 dark:hover:shadow-emerald-500/30 
-                   hover:border-violet-500/30 dark:hover:border-emerald-500/30`}
+                   hover:shadow-gray-400/50 dark:hover:shadow-emerald-500/30 
+                   hover:border-gray-400/50 dark:hover:border-emerald-500/30`} // MODIFIED: Changed light mode hover shadow/border to grey
     >
       <div>
         <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
@@ -603,7 +603,7 @@ const AiAssistantDemo = ({ isDark }) => {
             flex items-center justify-center text-sm
             
             // *** ADDED HOVER TRANSFORM AND SHADOW INTENSITY ***
-            transform hover:scale-[1.01] hover:shadow-lg active:scale-95`} // <-- NEW CLASSES ADDED
+            transform hover:scale-[1.01] hover:shadow-lg active:scale-95`}
           disabled={loading}
         >
           {loading ? (
@@ -690,9 +690,9 @@ const App = () => {
     // Header background is light/dark, border is light/dark
     <header className="fixed top-0 left-0 right-0 z-40 bg-white/50 dark:bg-gray-900/10 backdrop-blur-xl shadow-lg border-b border-gray-200 dark:border-gray-800/20 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-20 py-3 sm:py-4 flex justify-between items-center">
-        {/* Logo text color flips */}
+        {/* Logo text color flips: Dark Grey (light) to Emerald (dark) */}
         <a href="#" className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white transition-colors duration-200">
-          <span className="text-violet-600 dark:text-emerald-500">K.</span> CHOW
+          <span className="text-gray-800 dark:text-emerald-500">K.</span> CHOW
         </a>
 
         {/* Desktop Nav */}
@@ -701,16 +701,15 @@ const App = () => {
             <button
               key={item.name}
               onClick={() => scrollToSection(item.href)}
-              // Text color flips from dark gray (light) to light gray (dark)
-              // Hover color flips from indigo (light) to emerald (dark)
-              className="text-gray-600 dark:text-gray-300 font-medium hover:text-indigo-600 dark:hover:text-emerald-400 transition-colors duration-200 text-sm tracking-wide uppercase"
+              // Hover color flips from Emerald (light) to Emerald (dark)
+              className="text-gray-600 dark:text-gray-300 font-medium hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200 text-sm tracking-wide uppercase"
             >
               {item.name}
             </button>
           ))}
           <button
             onClick={toggleDark}
-            className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-emerald-400 transition-colors duration-200"
+            className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200"
             aria-label="Toggle dark mode"
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
@@ -721,7 +720,7 @@ const App = () => {
         <div className="md:hidden flex items-center space-x-2">
            <button
             onClick={toggleDark}
-            className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-emerald-400 transition-colors duration-200"
+            className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200"
             aria-label="Toggle dark mode"
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
@@ -744,7 +743,7 @@ const App = () => {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="text-left py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-indigo-500/10 dark:hover:bg-emerald-500/10 hover:text-indigo-600 dark:hover:text-emerald-400 rounded-lg font-medium transition duration-200"
+                className="text-left py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-500/10 dark:hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-lg font-medium transition duration-200"
               >
                 {item.name}
               </button>
@@ -760,20 +759,20 @@ const App = () => {
     <Section id="hero" title="Hi, I'm Kelvin Chow.">
       <div className="flex flex-col lg:flex-row items-center justify-between mt-8 space-y-8 lg:space-y-0 lg:space-x-12">
         <div className="lg:w-3/5">
-          {/* Main title text and accent color flip */}
+          {/* Main title text and accent color flip: Emerald (light) to Emerald (dark) */}
           {/* **MOBILE FIX: Reduced text size from 6xl to 5xl on smallest screens** */}
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black mb-4 leading-tight text-gray-900 dark:text-white">
-            Driving <span className="text-violet-600 dark:text-emerald-400">Efficiency</span> through Automation & Data.
+            Driving <span className="text-emerald-600 dark:text-emerald-400">Efficiency</span> through Automation & Data.
           </h1>
           <p className="text-lg sm:text-xl text-gray-700 dark:text-white mb-8 max-w-lg"> 
             A Computer Science Co-op student at Toronto Metropolitan University specializing in Cloud Engineering, Data Engineering, AI Implementation, Software Development, and Automation.
           </p>
-          {/* Button color flips */}
+          {/* Button color flips: Both modes use Emerald */}
           <div className="flex flex-wrap gap-3 sm:gap-4">
               <button
                 onClick={() => scrollToSection('#projects')}
                 // **MOBILE FIX: Reduced padding and font size slightly on mobile**
-                className="flex items-center space-x-2 px-4 py-2 text-base sm:px-6 sm:py-3 sm:text-lg font-semibold bg-violet-600/90 dark:bg-emerald-600/80 text-white rounded-full shadow-lg hover:bg-violet-500/90 dark:hover:bg-emerald-500/90 transition duration-300 transform hover:scale-[1.02] active:scale-95 shadow-violet-500/50 dark:shadow-emerald-500/50 border border-violet-500/50 dark:border-emerald-500/50 backdrop-blur-sm"
+                className="flex items-center space-x-2 px-4 py-2 text-base sm:px-6 sm:py-3 sm:text-lg font-semibold bg-emerald-600/90 dark:bg-emerald-600/80 text-white rounded-full shadow-lg hover:bg-emerald-500/90 dark:hover:bg-emerald-500/90 transition duration-300 transform hover:scale-[1.02] active:scale-95 shadow-emerald-500/50 dark:shadow-emerald-500/50 border border-emerald-500/50 dark:border-emerald-500/50 backdrop-blur-sm"
               >
                 <Zap size={20} />
                 <span>View My Work</span>
@@ -794,11 +793,11 @@ const App = () => {
               className="group w-48 h-48 sm:w-64 sm:h-64
                          bg-gray-200/50 dark:bg-gray-700/20
                          rounded-full flex items-center justify-center
-                         border-8 border-violet-500/30 dark:border-emerald-500/30
-                         shadow-[0_0_80px_-15px_rgba(109,40,217,0.5)]
+                         border-8 border-gray-300/50 dark:border-emerald-500/30 // MODIFIED: Light border is grey
+                         shadow-[0_0_80px_-15px_rgba(156,163,175,0.5)] // MODIFIED: Light shadow is grey-400
                          dark:shadow-[0_0_80px_-15px_rgba(16,185,129,0.5)]
                          backdrop-blur-md overflow-hidden relative
-                         transition-transform duration-500 ease-in-out hover:scale-[1.03]" // <-- ADDED HOVER ANIMATION
+                         transition-transform duration-500 ease-in-out hover:scale-[1.03]"
             >
               <img 
                 src="./profile.jpg" 
@@ -810,7 +809,7 @@ const App = () => {
               <span
                 className="pointer-events-none absolute inset-0 rounded-full
                            ring-0 group-hover:ring-8
-                           ring-violet-500/10 dark:ring-emerald-400/10
+                           ring-gray-300/10 dark:ring-emerald-400/10 // MODIFIED: Light ring is grey
                            transition-all duration-500"
               />
 
@@ -831,8 +830,8 @@ const About = React.memo(() => (
              border border-gray-200 dark:border-gray-700/20 
              shadow-xl dark:shadow-2xl backdrop-blur-xl 
              transition duration-300 
-             hover:shadow-violet-500/30 dark:hover:shadow-emerald-500/30 
-             hover:border-violet-500/30 dark:hover:border-emerald-500/30"> {/* <-- NEW CLASSES ADDED */}
+             hover:shadow-gray-400/50 dark:hover:shadow-emerald-500/30 
+             hover:border-gray-400/50 dark:hover:border-emerald-500/30"> {/* MODIFIED: Changed light mode hover shadow/border to grey */}
           
           <p className="mb-4 text-gray-700 dark:text-white text-base sm:text-lg"> 
             I am a highly motivated BSc. in Computer Science Co-op student with experience across System Engineering, Cloud Solutions, full-stack development, and data-driven projects. My core expertise lies in developing robust automation scripts (PowerShell, Bash) and leveraging languages like Python, Java, and SQL to solve real-world operational challenges.
@@ -847,10 +846,10 @@ const About = React.memo(() => (
              border border-gray-200 dark:border-gray-700/20 
              shadow-xl dark:shadow-2xl backdrop-blur-xl 
              transition duration-300
-             hover:shadow-violet-500/30 dark:hover:shadow-emerald-500/30 
-             hover:border-violet-500/30 dark:hover:border-emerald-500/30"> {/* <-- NEW CLASSES ADDED */}
+             hover:shadow-gray-400/50 dark:hover:shadow-emerald-500/30 
+             hover:border-gray-400/50 dark:hover:border-emerald-500/30"> {/* MODIFIED: Changed light mode hover shadow/border to grey */}
           
-          <h4 className="text-xl sm:text-2xl font-bold mb-4 text-violet-600 dark:text-emerald-400">Key Qualifications</h4>
+          <h4 className="text-xl sm:text-2xl font-bold mb-4 text-emerald-600 dark:text-emerald-400">Key Qualifications</h4>
           <ul className="list-disc list-inside text-gray-700 dark:text-white space-y-2 text-base sm:text-lg">
             <li>Bachelor Honours BSc. in Computer Science Co-op, Toronto Metropolitan University (Dean's List).</li>
             <li>Certifications: AWS Cloud Practitioner, Azure AI Engineer (In-progress).</li>
@@ -869,7 +868,7 @@ const About = React.memo(() => (
           <div key={group}>
             {/* Group header icon/text color flip */}
             <h3 className="text-xl sm:text-2xl font-semibold mb-5 sm:mb-6 text-gray-900 dark:text-white flex items-center space-x-3">
-                <Terminal size={24} className="text-violet-600 dark:text-emerald-400" />
+                <Terminal size={24} className="text-emerald-600 dark:text-emerald-400" />
                 <span>{group}</span>
             </h3>
             <div className="flex flex-wrap gap-3 sm:gap-4">
@@ -877,7 +876,8 @@ const About = React.memo(() => (
                 <span
                   key={skill}
                   // ADDED: hover:shadow-2xl for depth, enhanced pill background opacity
-                  className="px-4 py-2 sm:px-5 sm:py-2.5 text-sm sm:text-base bg-gray-100/70 dark:bg-gray-800/90 text-gray-800 dark:text-white font-medium rounded-lg shadow-inner border border-gray-300 dark:border-gray-700/20 backdrop-blur-sm transition duration-300 hover:bg-violet-500/30 dark:hover:bg-emerald-500/30 hover:text-gray-900 dark:hover:text-white hover:scale-105 hover:shadow-2xl"
+                  // MODIFIED: Light mode is now gray with emerald hover accent
+                  className="px-4 py-2 sm:px-5 sm:py-2.5 text-sm sm:text-base bg-gray-100/70 dark:bg-gray-800/90 text-gray-800 dark:text-white font-medium rounded-lg shadow-inner border border-gray-300 dark:border-gray-700/20 backdrop-blur-sm transition duration-300 hover:bg-emerald-500/30 dark:hover:bg-emerald-500/30 hover:text-gray-900 dark:hover:text-white hover:scale-105 hover:shadow-2xl"
                 >
                   {skill}
                 </span>
@@ -913,10 +913,9 @@ const Experience = React.memo(() => (
           return (
             <div key={item.id} className="relative mb-10 md:mb-12 md:flex items-center">
                 
-                {/* Timeline Dot (Visible on all screens) */}
-                {/* **MOBILE FIX: Left-align dot and content on small screens** */}
+                {/* Timeline Dot: Now always Emerald */}
                 <div 
-                    className={`absolute z-10 flex items-center justify-center w-8 h-8 rounded-full bg-violet-600 dark:bg-emerald-500 
+                    className={`absolute z-10 flex items-center justify-center w-8 h-8 rounded-full bg-emerald-600 dark:bg-emerald-500 
                                 ring-8 ring-white dark:ring-gray-900/50 backdrop-blur-sm shadow-lg
                                 // Desktop positioning: uses md:left-1/2 and negative margin
                                 // Mobile positioning: uses left-3 (aligned with the mobile line/dot) and no negative margin
@@ -936,11 +935,11 @@ const Experience = React.memo(() => (
                                    p-6 rounded-lg shadow-xl dark:shadow-2xl backdrop-blur-xl 
                                    bg-white/50 dark:bg-gray-900/40 
                                    border border-gray-200 dark:border-gray-700/20 
-                                   transition duration-300 hover:shadow-violet-500/30 dark:hover:shadow-emerald-500/30 
-                                   hover:border-violet-500/30 dark:hover:border-emerald-500/30`}
+                                   transition duration-300 hover:shadow-gray-400/50 dark:hover:shadow-emerald-500/30 
+                                   hover:border-gray-400/50 dark:hover:border-emerald-500/30`} // MODIFIED: Changed light mode hover shadow/border to grey
                     >
-                        {/* **MOBILE FIX: Always left-align time on mobile** */}
-                        <time className={`block mb-2 text-sm font-normal leading-none text-indigo-600/80 dark:text-emerald-400/80 text-left md:${isLeft ? 'text-right' : 'text-left'}`}>
+                        {/* Time color: Now always Emerald */}
+                        <time className={`block mb-2 text-sm font-normal leading-none text-emerald-600/80 dark:text-emerald-400/80 text-left md:${isLeft ? 'text-right' : 'text-left'}`}>
                             {item.year}
                         </time>
                         
@@ -954,7 +953,7 @@ const Experience = React.memo(() => (
                                     alt={`${item.company} logo`}
                                     // **MOBILE FIX: Always mr-4 for spacing on mobile**
                                     className={`w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-lg flex-shrink-0 
-                                                border border-violet-500/30 dark:border-emerald-500/30
+                                                border border-gray-300/50 dark:border-emerald-500/30 // MODIFIED: Light border is grey
                                                 mr-3 sm:mr-4 md:${isLeft ? 'md:ml-4 md:mr-0' : 'md:mr-4'}`} 
                                     onError={(e) => {
                                         e.target.onerror = null; 
@@ -989,7 +988,7 @@ const Experience = React.memo(() => (
         <div
             key={project.id}
             // Ensure cards scale on different screens
-            className="bg-white/50 dark:bg-gray-900/40 rounded-xl p-6 shadow-xl border border-gray-200 dark:border-gray-700/20 transition duration-300 hover:shadow-violet-500/30 dark:hover:shadow-emerald-500/30 hover:border-violet-500/30 dark:hover:border-emerald-500/30 cursor-pointer flex flex-col justify-between backdrop-blur-xl"
+            className="bg-white/50 dark:bg-gray-900/40 rounded-xl p-6 shadow-xl border border-gray-200 dark:border-gray-700/20 transition duration-300 hover:shadow-gray-400/50 dark:hover:shadow-emerald-500/30 hover:border-gray-400/50 dark:hover:border-emerald-500/30 cursor-pointer flex flex-col justify-between backdrop-blur-xl" // MODIFIED: Changed light mode hover shadow/border to grey
             onClick={() => setSelectedProject(project)}
           >
             <div>
@@ -999,14 +998,14 @@ const Experience = React.memo(() => (
             </div>
             <div className="flex flex-wrap gap-2 mt-4">
               {project.tags.slice(0, 3).map(tag => (
-                <span key={tag} className="text-xs font-semibold px-3 py-1 bg-violet-100/70 text-violet-800 dark:bg-emerald-900/40 dark:text-emerald-300 rounded-full border border-violet-700/50 dark:border-emerald-700/50">
+                <span key={tag} className="text-xs font-semibold px-3 py-1 bg-gray-100/70 text-gray-800 dark:bg-emerald-900/40 dark:text-emerald-300 rounded-full border border-gray-400/50 dark:border-emerald-700/50"> // MODIFIED: Light mode is now gray/white
                   {tag}
                 </span>
               ))}
             </div>
             <div className="mt-4">
                 {/* Button link color flip */}
-                <button className="text-violet-600 dark:text-emerald-400 hover:text-violet-500 dark:hover:text-emerald-300 font-semibold flex items-center space-x-1 text-sm">
+                <button className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 font-semibold flex items-center space-x-1 text-sm">
                     <span>View Details</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </button>
@@ -1017,15 +1016,10 @@ const Experience = React.memo(() => (
   return (
         <Section id="projects" title="Showcase">
             <div className="space-y-8">
-                {/* ***MODIFICATION START***
-                  Remove 'max-w-4xl mx-auto' to let the AiAssistantDemo component 
-                  span the full width of the <Section> container, which is max-w-7xl.
-                  This ensures it aligns with the grid below it.
-                */}
+                {/* The AiAssistantDemo component spans the full width of the <Section> container */}
                 <div>
                     <AiAssistantDemo isDark={isDark} />
                 </div>
-                {/* ***MODIFICATION END*** */}
 
                 {/* The rest of the projects flow in a standard 3-column grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -1036,7 +1030,7 @@ const Experience = React.memo(() => (
     );
   });
 
-  // --- CONTACT SECTION - MEMOIZED (Updated to remove LLM demo and improve aesthetics) ---
+  // --- CONTACT SECTION - MEMOIZED ---
 const Contact = React.memo(({ isDark }) => (
     <Section id="contact" title="Get In Touch"> 
       
@@ -1048,8 +1042,8 @@ const Contact = React.memo(({ isDark }) => (
              border border-gray-200 dark:border-gray-700/20 
              shadow-2xl backdrop-blur-xl 
              transition duration-300 
-             hover:shadow-violet-500/40 dark:hover:shadow-emerald-500/40 
-             hover:border-violet-500/40 dark:hover:border-emerald-500/40">
+             hover:shadow-gray-400/40 dark:hover:shadow-emerald-500/40 
+             hover:border-gray-400/40 dark:hover:border-emerald-500/40"> // MODIFIED: Changed light mode hover shadow/border to grey
         
           <div className="space-y-6">
             <p className="text-xl font-medium mb-8 text-gray-700 dark:text-white"> 
@@ -1063,10 +1057,10 @@ const Contact = React.memo(({ isDark }) => (
               <a 
                 href="mailto:kelvinchow2014@gmail.com" 
                 className="flex items-center justify-center space-x-3 w-full px-6 py-4 text-lg font-bold 
-                           bg-violet-600/90 dark:bg-emerald-600/80 text-white rounded-xl shadow-lg 
-                           hover:bg-violet-500/90 dark:hover:bg-emerald-500/90 transition duration-300 
+                           bg-emerald-600/90 dark:bg-emerald-600/80 text-white rounded-xl shadow-lg 
+                           hover:bg-emerald-500/90 dark:hover:bg-emerald-500/90 transition duration-300 
                            transform hover:scale-[1.01] active:scale-95 
-                           shadow-violet-500/50 dark:shadow-emerald-500/50 border border-violet-500/50 dark:border-emerald-500/50 backdrop-blur-sm"
+                           shadow-emerald-500/50 dark:shadow-emerald-500/50 border border-emerald-500/50 dark:border-emerald-500/50 backdrop-blur-sm" // MODIFIED: Changed to Emerald
               >
                 <Send size={24} />
                 <span>kelvinchow2014@gmail.com</span>
@@ -1075,12 +1069,12 @@ const Contact = React.memo(({ isDark }) => (
               <div className="flex flex-wrap gap-4 items-center pt-4 justify-center md:justify-start">
                   {/* Social Links */}
                   <a href="https://github.com/kelvinchow2003" target="_blank" rel="noopener noreferrer" 
-                     className="p-3 text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-800/50 rounded-full hover:text-violet-600 dark:hover:text-emerald-400 transition shadow-md hover:shadow-lg transform hover:scale-105"
+                     className="p-3 text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-800/50 rounded-full hover:text-emerald-600 dark:hover:text-emerald-400 transition shadow-md hover:shadow-lg transform hover:scale-105" // MODIFIED: Changed hover to Emerald
                      aria-label="GitHub Profile">
                     <Github size={24} />
                   </a>
                   <a href="https://www.linkedin.com/in/kelchow/" target="_blank" rel="noopener noreferrer" 
-                     className="p-3 text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-800/50 rounded-full hover:text-violet-600 dark:hover:text-emerald-400 transition shadow-md hover:shadow-lg transform hover:scale-105"
+                     className="p-3 text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-800/50 rounded-full hover:text-emerald-600 dark:hover:text-emerald-400 transition shadow-md hover:shadow-lg transform hover:scale-105" // MODIFIED: Changed hover to Emerald
                      aria-label="LinkedIn Profile">
                     <LinkedIn size={24} /> 
                   </a>
@@ -1137,9 +1131,10 @@ const Contact = React.memo(({ isDark }) => (
             }
         `}</style>
 
-        {/* Background color overlay flips from Indigo/Violet (light) to Emerald/Cyan (dark) */}
+        {/* Background color overlay flips: Grey/White (light) to Emerald/Cyan (dark) */}
         <div className="absolute inset-0 z-0 opacity-20 bg-[url('https://source.unsplash.com/random/1600x900/?abstract,geometric')] bg-cover bg-center"></div>
-        <div className="absolute inset-0 z-0 bg-gradient-to-br from-violet-900/10 to-indigo-900/10 dark:from-emerald-900/20 dark:to-cyan-900/20 transition-colors duration-500"></div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-br from-gray-500/10 to-gray-300/10 dark:from-emerald-900/20 dark:to-cyan-900/20 transition-colors duration-500">
+        </div> // MODIFIED: Changed light mode background overlay to subtle grey
 
         <Header />
         {/* **MOBILE FIX: Reduced top padding on main content on small screens** */}
