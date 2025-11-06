@@ -163,6 +163,7 @@ const LinkedIn = React.memo(({ size = 24, className = "" }) => (
 
 /**
  * Reusable Section Wrapper - MEMOIZED
+ * MODIFIED: Added 'animate-float' class to the content div for the continuous floating effect.
  */
 const Section = React.memo(({ id, children, title }) => {
   // Setup intersection observer hook
@@ -172,8 +173,10 @@ const Section = React.memo(({ id, children, title }) => {
   });
 
   // Base animation classes: Fade in and slide up slightly
+  const floatingClass = 'animate-float'; 
+  
   const animationClasses = `transition-all duration-1000 ease-out 
-    ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`;
+    ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${floatingClass}`;
 
   return (
     // **MOBILE FIX: Reduced padding and min-height on small screens**
@@ -1115,6 +1118,25 @@ const Contact = React.memo(({ isDark }) => (
   return (
     // Main container background gradient flips. Default (no dark:) is light.
     <div className={`min-h-screen bg-gradient-to-br from-white to-gray-100 dark:from-gray-900 dark:to-black transition-colors duration-500 font-sans relative`}>
+        
+        {/* ADDED: Global Style Block for Floating Animation */}
+        <style>{`
+            @keyframes float {
+                0% {
+                    transform: translateY(0px);
+                }
+                50% {
+                    transform: translateY(-5px); /* Move up 5px */
+                }
+                100% {
+                    transform: translateY(0px);
+                }
+            }
+            .animate-float {
+                animation: float 6s ease-in-out infinite; /* Apply to all sections */
+            }
+        `}</style>
+
         {/* Background color overlay flips from Indigo/Violet (light) to Emerald/Cyan (dark) */}
         <div className="absolute inset-0 z-0 opacity-20 bg-[url('https://source.unsplash.com/random/1600x900/?abstract,geometric')] bg-cover bg-center"></div>
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-violet-900/10 to-indigo-900/10 dark:from-emerald-900/20 dark:to-cyan-900/20 transition-colors duration-500"></div>
