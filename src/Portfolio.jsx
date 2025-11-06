@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { useInView } from 'react-intersection-observer'; // <-- NEW IMPORT for scroll animations
+import { useInView } from 'react-intersection-observer'; 
 import { Briefcase, Code, Terminal, Send, Menu, X, Sun, Moon, Link, Github, Zap, Loader, Aperture, Volume2, Download } from 'lucide-react';
 
 // --- TTS UTILITIES (for converting PCM audio from API to playable WAV format) ---
@@ -136,9 +136,9 @@ const experienceData = [
 
 const skillGroups = {
     "Languages & Core": ["Python", "Java", "C", "SQL", "Javascript", "HTML", "CSS"],
-    "Frameworks & Data": ["React", "Scikit-learn", "Pandas", "Jupyter", "Django/Flask (Mock)"],
-    "DevOps & Automation": ["PowerShell", "Bash", "GIT", "Active Directory", "Intune", "Docker (Mock)"], 
-    "Cloud & Tools": ["AWS Cloud Practitioner", "Azure AI (In-progress)", "Firestore (Mock)", "Office 365", "Co-pilot", "Power Apps"],
+    "Frameworks & Data": ["React", "Scikit-learn", "Pandas", "Jupyter"],
+    "DevOps & Automation": ["PowerShell", "Bash", "GIT", "Active Directory", "Intune", "Docker "], 
+    "Cloud & Tools": ["AWS Cloud Practitioner", "Azure AI (In-progress)", "AWS Data Engineer (In-progress)", "Office 365", "Co-pilot", "Power Apps"],
 };
 
 // --- Custom Components ---
@@ -176,16 +176,16 @@ const Section = React.memo(({ id, children, title }) => {
     ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`;
 
   return (
-    // Border changes from gray (light) to emerald (dark)
+    // **MOBILE FIX: Reduced padding and min-height on small screens**
     <section 
       id={id} 
       ref={ref} // Attach the ref to the section
-      className="min-h-screen py-20 px-6 sm:px-10 lg:px-20 border-t border-gray-200/50 dark:border-gray-700/30 flex flex-col justify-center"
+      className="min-h-0 py-12 px-4 sm:py-16 sm:px-10 lg:px-20 border-t border-gray-200/50 dark:border-gray-700/30 flex flex-col justify-center"
     >
       {/* Apply animation to the content wrapper */}
       <div className={`max-w-7xl mx-auto w-full ${animationClasses}`}> 
         {/* Header gradient flips from Purple (light) to Emerald (dark) */}
-        <h2 className="text-4xl sm:text-5xl font-extrabold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-indigo-600 dark:from-emerald-400 dark:to-cyan-500 tracking-tight transition-colors duration-500">
+        <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 sm:mb-10 text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-indigo-600 dark:from-emerald-400 dark:to-cyan-500 tracking-tight transition-colors duration-500">
           {title}
         </h2>
         {children}
@@ -297,8 +297,8 @@ const ProjectModal = ({ project, onClose, isDark }) => {
       onClick={onClose}
     >
       <div
-        
-        className="relative w-full max-w-4xl p-8 bg-white/10 dark:bg-gray-800/90 rounded-2xl shadow-2xl transform scale-95 md:scale-100 transition-transform duration-300 border border-violet-500/30 dark:border-emerald-500/30 backdrop-blur-2xl"
+        // **MOBILE FIX: Use smaller padding on the modal content on mobile**
+        className="relative w-full max-w-4xl p-6 sm:p-8 bg-white/10 dark:bg-gray-800/90 rounded-2xl shadow-2xl transform scale-95 md:scale-100 transition-transform duration-300 border border-violet-500/30 dark:border-emerald-500/30 backdrop-blur-2xl"
         onClick={(e) => e.stopPropagation()} 
       >
         <button
@@ -451,12 +451,13 @@ const TtsPlayer = React.memo(({ text, voice, isDark }) => {
         <div className="inline-block">
             <button
                 onClick={playAudio}
-                className={`flex items-center space-x-2 px-4 py-3 text-lg font-semibold bg-gray-600/50 dark:bg-gray-700/50 text-white rounded-full transition duration-300 transform hover:scale-[1.02] active:scale-95 border border-gray-500/50 backdrop-blur-sm shadow-md shadow-gray-700/50
+                // **MOBILE FIX: Reduced font size and padding slightly on mobile**
+                className={`flex items-center space-x-2 px-3 py-2 text-base sm:px-4 sm:py-3 sm:text-lg font-semibold bg-gray-600/50 dark:bg-gray-700/50 text-white rounded-full transition duration-300 transform hover:scale-[1.02] active:scale-95 border border-gray-500/50 backdrop-blur-sm shadow-md shadow-gray-700/50
                     ${loading ? 'opacity-70 cursor-not-allowed' : `hover:bg-${accentColor}-600/70`}`}
                 disabled={loading}
             >
                 {loading ? (
-                    <Loader size={20} className="animate-spin" />
+                    <Loader size={20} className="animate-spin mr-2" />
                 ) : (
                     <Volume2 size={20} />
                 )}
@@ -562,11 +563,24 @@ const AiAssistantDemo = ({ isDark }) => {
 
   return (
     
-    <div className="p-8 **bg-white/50** dark:bg-gray-900/40 rounded-xl shadow-xl space-y-6 border border-gray-200 dark:border-gray-700/20 **backdrop-blur-xl**">
-      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-        <Aperture className={`mr-3 text-${accentColor}-600`} size={24} />
-        LLM Assistant Demo
-      </h3>
+    // **MOBILE FIX: Reduced padding on mobile, ensured responsive container**
+    // This is the card wrapper itself
+    <div className={`p-4 sm:p-6 bg-white/50 dark:bg-gray-900/40 rounded-xl shadow-xl space-y-4 
+                   border border-gray-200 dark:border-gray-700/20 backdrop-blur-xl 
+                   h-full flex flex-col justify-between 
+                   transition duration-300 
+                   hover:shadow-violet-500/30 dark:hover:shadow-emerald-500/30 
+                   hover:border-violet-500/30 dark:hover:border-emerald-500/30`}
+    >
+      <div>
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+            <Aperture className={`mr-3 text-${accentColor}-600`} size={24} />
+            LLM Technical Assistant (Demo)
+        </h3>
+        <p className="text-sm text-gray-700 dark:text-gray-200 mb-4">
+            Ask a technical question to see the Gemini API in action.
+        </p>
+      </div>
       
       <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
         <input 
@@ -574,12 +588,19 @@ const AiAssistantDemo = ({ isDark }) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Ask a technical question (e.g., 'What is CRDT?')" 
-          className={`w-full p-3 border border-gray-300 dark:border-gray-600/30 rounded-lg bg-white dark:bg-gray-900/90 text-gray-900 dark:text-white focus:ring-${accentColor}-500 focus:border-${accentColor}-500 transition backdrop-blur-sm`} 
+          className={`w-full p-3 border border-gray-300 dark:border-gray-600/30 rounded-lg bg-white dark:bg-gray-900/90 text-gray-900 dark:text-white focus:ring-${accentColor}-500 focus:border-${accentColor}-500 transition backdrop-blur-sm text-sm`} 
           disabled={loading}
         />
         <button
           type="submit"
-          className={`w-full px-6 py-3 font-semibold bg-${accentColor}-600/90 text-white rounded-lg hover:bg-${accentColor}-500/80 transition duration-200 shadow-md shadow-${accentColor}-500/40 border border-${accentColor}-500/50 backdrop-blur-sm flex items-center justify-center`}
+          className={`w-full px-6 py-3 font-semibold bg-${accentColor}-600/90 text-white rounded-lg 
+            hover:bg-${accentColor}-500/80 transition duration-200 
+            shadow-md shadow-${accentColor}-500/40 
+            border border-${accentColor}-500/50 backdrop-blur-sm 
+            flex items-center justify-center text-sm
+            
+            // *** ADDED HOVER TRANSFORM AND SHADOW INTENSITY ***
+            transform hover:scale-[1.01] hover:shadow-lg active:scale-95`} // <-- NEW CLASSES ADDED
           disabled={loading}
         >
           {loading ? (
@@ -591,13 +612,13 @@ const AiAssistantDemo = ({ isDark }) => {
         </button>
       </form>
 
-      <div className="pt-4 border-t border-gray-200 dark:border-gray-700/50">
-        <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Response:</h4>
+      <div className="pt-4 border-t border-gray-200 dark:border-gray-700/50 flex-grow overflow-y-auto">
+        <h4 className="text-base font-semibold text-gray-900 dark:text-white mb-2">Response:</h4>
         {error && <p className="text-sm text-red-500">{error}</p>}
         
         {result ? (
           <div className="space-y-3">
-            <p className="text-gray-700 dark:text-gray-200 whitespace-pre-wrap">{result.text}</p>
+            <p className="text-gray-700 dark:text-gray-200 whitespace-pre-wrap text-sm">{result.text}</p>
             {result.sources.length > 0 && (
                 <div className="pt-2">
                     <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Sources:</p>
@@ -665,9 +686,9 @@ const App = () => {
   const Header = React.memo(() => (
     // Header background is light/dark, border is light/dark
     <header className="fixed top-0 left-0 right-0 z-40 bg-white/50 dark:bg-gray-900/10 backdrop-blur-xl shadow-lg border-b border-gray-200 dark:border-gray-800/20 transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-20 py-4 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-20 py-3 sm:py-4 flex justify-between items-center">
         {/* Logo text color flips */}
-        <a href="#" className="text-2xl font-black text-gray-900 dark:text-white transition-colors duration-200">
+        <a href="#" className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white transition-colors duration-200">
           <span className="text-violet-600 dark:text-emerald-500">K.</span> CHOW
         </a>
 
@@ -734,20 +755,22 @@ const App = () => {
   // --- HERO SECTION - MEMOIZED ---
   const Hero = React.memo(() => (
     <Section id="hero" title="Hi, I'm Kelvin Chow.">
-      <div className="flex flex-col lg:flex-row items-center justify-between mt-10 space-y-10 lg:space-y-0 lg:space-x-12">
+      <div className="flex flex-col lg:flex-row items-center justify-between mt-8 space-y-8 lg:space-y-0 lg:space-x-12">
         <div className="lg:w-3/5">
           {/* Main title text and accent color flip */}
-          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black mb-6 leading-tight text-gray-900 dark:text-white">
+          {/* **MOBILE FIX: Reduced text size from 6xl to 5xl on smallest screens** */}
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black mb-4 leading-tight text-gray-900 dark:text-white">
             Driving <span className="text-violet-600 dark:text-emerald-400">Efficiency</span> through Automation & Data.
           </h1>
-          <p className="text-xl sm:text-2xl text-gray-700 dark:text-white mb-10 max-w-lg"> 
-            A Computer Science Co-op student at Toronto Metropolitan University specializing in **IT Support, Software Development, and Machine Learning**.
+          <p className="text-lg sm:text-xl text-gray-700 dark:text-white mb-8 max-w-lg"> 
+            A Computer Science Co-op student at Toronto Metropolitan University specializing in Cloud Engineering, Data Engineering, AI Implementation, Software Development, and Automation.
           </p>
           {/* Button color flips */}
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-3 sm:gap-4">
               <button
                 onClick={() => scrollToSection('#projects')}
-                className="flex items-center space-x-2 px-8 py-3 text-lg font-semibold bg-violet-600/90 dark:bg-emerald-600/80 text-white rounded-full shadow-lg hover:bg-violet-500/90 dark:hover:bg-emerald-500/90 transition duration-300 transform hover:scale-[1.02] active:scale-95 shadow-violet-500/50 dark:shadow-emerald-500/50 border border-violet-500/50 dark:border-emerald-500/50 backdrop-blur-sm"
+                // **MOBILE FIX: Reduced padding and font size slightly on mobile**
+                className="flex items-center space-x-2 px-4 py-2 text-base sm:px-6 sm:py-3 sm:text-lg font-semibold bg-violet-600/90 dark:bg-emerald-600/80 text-white rounded-full shadow-lg hover:bg-violet-500/90 dark:hover:bg-emerald-500/90 transition duration-300 transform hover:scale-[1.02] active:scale-95 shadow-violet-500/50 dark:shadow-emerald-500/50 border border-violet-500/50 dark:border-emerald-500/50 backdrop-blur-sm"
               >
                 <Zap size={20} />
                 <span>View My Work</span>
@@ -755,7 +778,7 @@ const App = () => {
               
               {/* TTS API FEATURE */}
               <TtsPlayer 
-                  text="This is Kelvin Chow, a Computer Science Co-op student specializing in IT Support, Software Development, and Machine Learning. I drive efficiency through automation and data."
+                  text="This is Kelvin Chow, a Computer Science Co-op student specializing in Cloud Engineering, Data Engineering, AI Implementation, and Software Development. I drive efficiency through automation and data."
                   voice="Kore"
                   isDark={isDark}
               />
@@ -763,31 +786,32 @@ const App = () => {
         </div>
         <div className="lg:w-2/5 flex justify-center">
           {/* Circle border and shadow flip */}
-<div
-  className="group w-64 h-64 sm:w-80 sm:h-80
-             bg-gray-200/50 dark:bg-gray-700/20
-             rounded-full flex items-center justify-center
-             border-8 border-violet-500/30 dark:border-emerald-500/30
-             shadow-[0_0_80px_-15px_rgba(109,40,217,0.5)]
-             dark:shadow-[0_0_80px_-15px_rgba(16,185,129,0.5)]
-             backdrop-blur-md overflow-hidden relative
-             transition-transform duration-500 ease-in-out hover:scale-[1.03]" // <-- ADDED HOVER ANIMATION
->
-  <img 
-    src="./profile.jpg" 
-    alt="Profile Picture" 
-    className="rounded-full w-full h-full object-cover" 
-  />
+            {/* **MOBILE FIX: Reduced image size on mobile** */}
+            <div
+              className="group w-48 h-48 sm:w-64 sm:h-64
+                         bg-gray-200/50 dark:bg-gray-700/20
+                         rounded-full flex items-center justify-center
+                         border-8 border-violet-500/30 dark:border-emerald-500/30
+                         shadow-[0_0_80px_-15px_rgba(109,40,217,0.5)]
+                         dark:shadow-[0_0_80px_-15px_rgba(16,185,129,0.5)]
+                         backdrop-blur-md overflow-hidden relative
+                         transition-transform duration-500 ease-in-out hover:scale-[1.03]" // <-- ADDED HOVER ANIMATION
+            >
+              <img 
+                src="./profile.jpg" 
+                alt="Profile Picture" 
+                className="rounded-full w-full h-full object-cover" 
+              />
 
-  {/* This will now align perfectly with the inner edge of the border-8 */}
-  <span
-    className="pointer-events-none absolute inset-0 rounded-full
-               ring-0 group-hover:ring-8
-               ring-violet-500/10 dark:ring-emerald-400/10
-               transition-all duration-500"
-  />
+              {/* This will now align perfectly with the inner edge of the border-8 */}
+              <span
+                className="pointer-events-none absolute inset-0 rounded-full
+                           ring-0 group-hover:ring-8
+                           ring-violet-500/10 dark:ring-emerald-400/10
+                           transition-all duration-500"
+              />
 
-</div>
+            </div>
         </div>
       </div>
     </Section>
@@ -796,7 +820,8 @@ const App = () => {
 // --- ABOUT SECTION - MEMOIZED ---
 const About = React.memo(() => (
     <Section id="about" title="About Me">
-      <div className="grid lg:grid-cols-2 gap-12 text-lg">
+      {/* **MOBILE FIX: Gap is slightly smaller on mobile** */}
+      <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 text-lg">
         
         {/* Added hover effects to the first card */}
         <div className="p-6 bg-white/50 dark:bg-gray-900/40 rounded-xl 
@@ -806,10 +831,10 @@ const About = React.memo(() => (
              hover:shadow-violet-500/30 dark:hover:shadow-emerald-500/30 
              hover:border-violet-500/30 dark:hover:border-emerald-500/30"> {/* <-- NEW CLASSES ADDED */}
           
-          <p className="mb-6 text-gray-700 dark:text-white"> 
-            I am a highly motivated BSc. in Computer Science Co-op student with experience across **System Support, full-stack development, and data-driven projects**. My core expertise lies in developing robust automation scripts (PowerShell, Bash) and leveraging languages like **Python, Java, and SQL** to solve real-world operational challenges.
+          <p className="mb-4 text-gray-700 dark:text-white text-base sm:text-lg"> 
+            I am a highly motivated BSc. in Computer Science Co-op student with experience across System Engineering, Cloud Solutions, full-stack development, and data-driven projects. My core expertise lies in developing robust automation scripts (PowerShell, Bash) and leveraging languages like Python, Java, and SQL to solve real-world operational challenges.
           </p>
-          <p className="text-gray-700 dark:text-white"> 
+          <p className="text-gray-700 dark:text-white text-base sm:text-lg"> 
             I excel in environments that demand both technical troubleshooting and strategic software implementation, demonstrated by my work in automating PDF generation (reducing workload by 53%) and implementing secure web portals. I am dedicated to continuous learning, currently pursuing the AWS Data Engineer and Azure AI Engineer certifications.
           </p>
         </div>
@@ -822,8 +847,8 @@ const About = React.memo(() => (
              hover:shadow-violet-500/30 dark:hover:shadow-emerald-500/30 
              hover:border-violet-500/30 dark:hover:border-emerald-500/30"> {/* <-- NEW CLASSES ADDED */}
           
-          <h4 className="text-2xl font-bold mb-4 text-violet-600 dark:text-emerald-400">Key Qualifications</h4>
-          <ul className="list-disc list-inside text-gray-700 dark:text-white space-y-2">
+          <h4 className="text-xl sm:text-2xl font-bold mb-4 text-violet-600 dark:text-emerald-400">Key Qualifications</h4>
+          <ul className="list-disc list-inside text-gray-700 dark:text-white space-y-2 text-base sm:text-lg">
             <li>Bachelor Honours BSc. in Computer Science Co-op, Toronto Metropolitan University (Dean's List).</li>
             <li>Certifications: AWS Cloud Practitioner, Azure AI Engineer (In-progress).</li>
             <li>Relevant Courses: Data Structures, AI, ML, Algorithms, Data Science and Mining, Statistics, Computer Networks.</li>
@@ -836,20 +861,20 @@ const About = React.memo(() => (
   // --- SKILLS SECTION - MEMOIZED ---
   const Skills = React.memo(() => (
     <Section id="skills" title="Technical Arsenal">
-      <div className="space-y-12">
+      <div className="space-y-10 sm:space-y-12">
         {Object.entries(skillGroups).map(([group, skills]) => (
           <div key={group}>
             {/* Group header icon/text color flip */}
-            <h3 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white flex items-center space-x-3">
+            <h3 className="text-xl sm:text-2xl font-semibold mb-5 sm:mb-6 text-gray-900 dark:text-white flex items-center space-x-3">
                 <Terminal size={24} className="text-violet-600 dark:text-emerald-400" />
                 <span>{group}</span>
             </h3>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
               {skills.map(skill => (
                 <span
                   key={skill}
                   // ADDED: hover:shadow-2xl for depth, enhanced pill background opacity
-                  className="px-5 py-2.5 **bg-gray-100/70** dark:bg-gray-800/90 text-gray-800 dark:text-white font-medium rounded-lg shadow-inner border border-gray-300 dark:border-gray-700/20 backdrop-blur-sm transition duration-300 hover:bg-violet-500/30 dark:hover:bg-emerald-500/30 hover:text-gray-900 dark:hover:text-white hover:scale-105 **hover:shadow-2xl**"
+                  className="px-4 py-2 sm:px-5 sm:py-2.5 text-sm sm:text-base bg-gray-100/70 dark:bg-gray-800/90 text-gray-800 dark:text-white font-medium rounded-lg shadow-inner border border-gray-300 dark:border-gray-700/20 backdrop-blur-sm transition duration-300 hover:bg-violet-500/30 dark:hover:bg-emerald-500/30 hover:text-gray-900 dark:hover:text-white hover:scale-105 hover:shadow-2xl"
                 >
                   {skill}
                 </span>
@@ -883,42 +908,51 @@ const Experience = React.memo(() => (
             : "md:mr-auto md:w-[calc(50%-2rem)]"; // Right side, pushed to the left boundary
 
           return (
-            <div key={item.id} className="relative mb-12 md:flex items-center">
+            <div key={item.id} className="relative mb-10 md:mb-12 md:flex items-center">
                 
                 {/* Timeline Dot (Visible on all screens) */}
+                {/* **MOBILE FIX: Left-align dot and content on small screens** */}
                 <div 
                     className={`absolute z-10 flex items-center justify-center w-8 h-8 rounded-full bg-violet-600 dark:bg-emerald-500 
                                 ring-8 ring-white dark:ring-gray-900/50 backdrop-blur-sm shadow-lg
-                                ${isLeft ? 'md:left-1/2 md:-translate-x-1/2 md:-ml-4 left-0 -translate-x-1/2 ml-4' : 'md:left-1/2 md:-translate-x-1/2 md:ml-4 left-0 -translate-x-1/2 ml-4'}`}
+                                // Desktop positioning: uses md:left-1/2 and negative margin
+                                // Mobile positioning: uses left-3 (aligned with the mobile line/dot) and no negative margin
+                                md:left-1/2 md:-translate-x-1/2
+                                left-3 -translate-x-1/2`} 
                 >
                     <Briefcase size={18} className="text-white" />
                 </div>
 
                 {/* Content Container */}
-                <div className={`w-full ${containerClasses}`}>
+                {/* **MOBILE FIX: Removed containerClasses and set text-left on mobile** */}
+                <div className={`w-full pl-12 md:pl-0 md:pr-0 ${containerClasses}`}>
                     {/* The main card with Glassmorphism and Hover Effects */}
                     <div 
-                        className={`mt-4 md:mt-0 ${cardClasses} 
+                        // **MOBILE FIX: Added ml-4 to the card to move it past the mobile line/dot**
+                        className={`mt-4 md:mt-0 ml-4 md:ml-0 ${cardClasses} 
                                    p-6 rounded-lg shadow-xl dark:shadow-2xl backdrop-blur-xl 
                                    bg-white/50 dark:bg-gray-900/40 
                                    border border-gray-200 dark:border-gray-700/20 
                                    transition duration-300 hover:shadow-violet-500/30 dark:hover:shadow-emerald-500/30 
                                    hover:border-violet-500/30 dark:hover:border-emerald-500/30`}
                     >
-                        <time className={`block mb-2 text-sm font-normal leading-none text-indigo-600/80 dark:text-emerald-400/80 ${isLeft ? 'md:text-right' : 'md:text-left'}`}>
+                        {/* **MOBILE FIX: Always left-align time on mobile** */}
+                        <time className={`block mb-2 text-sm font-normal leading-none text-indigo-600/80 dark:text-emerald-400/80 text-left md:${isLeft ? 'text-right' : 'text-left'}`}>
                             {item.year}
                         </time>
                         
-                        <div className={`flex items-start ${isLeft ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+                        {/* **MOBILE FIX: Always flex-row on mobile** */}
+                        <div className={`flex items-start flex-row md:${isLeft ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
                             
                             {/* Company Logo Section */}
                             {item.logoUrl && (
                                 <img 
                                     src={item.logoUrl} 
                                     alt={`${item.company} logo`}
-                                    className={`w-12 h-12 object-contain rounded-lg flex-shrink-0 
+                                    // **MOBILE FIX: Always mr-4 for spacing on mobile**
+                                    className={`w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-lg flex-shrink-0 
                                                 border border-violet-500/30 dark:border-emerald-500/30
-                                                ${isLeft ? 'md:ml-4 mr-4' : 'md:mr-4 mr-4'}`}
+                                                mr-3 sm:mr-4 md:${isLeft ? 'md:ml-4 md:mr-0' : 'md:mr-4'}`} 
                                     onError={(e) => {
                                         e.target.onerror = null; 
                                         e.target.src="https://placehold.co/48x48/34D399/000000?text=Logo"; 
@@ -928,10 +962,10 @@ const Experience = React.memo(() => (
                             
                             {/* Text Details */}
                             <div className="flex-grow"> 
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
                                     {item.title} at {item.company}
                                 </h3>
-                                <p className="text-base font-normal text-gray-700 dark:text-white mt-1"> 
+                                <p className="text-sm sm:text-base font-normal text-gray-700 dark:text-white mt-1"> 
                                     {item.details}
                                 </p>
                             </div>
@@ -946,20 +980,19 @@ const Experience = React.memo(() => (
 ));
 
   // --- PROJECTS SECTION - MEMOIZED ---
-  const Projects = React.memo(() => (
-    <Section id="projects" title="Showcase">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {projectsData.map(project => (
-          <div
+  const Projects = React.memo(({ isDark }) => {
+    
+    const projectCards = projectsData.map(project => (
+        <div
             key={project.id}
-            // UPDATED: Increased Blur/Transparency for Glassmorphism
-            className="**bg-white/50** dark:bg-gray-900/40 rounded-xl p-6 shadow-xl border border-gray-200 dark:border-gray-700/20 transition duration-300 hover:shadow-violet-500/30 dark:hover:shadow-emerald-500/30 hover:border-violet-500/30 dark:hover:border-emerald-500/30 cursor-pointer flex flex-col justify-between **backdrop-blur-xl**"
+            // Ensure cards scale on different screens
+            className="bg-white/50 dark:bg-gray-900/40 rounded-xl p-6 shadow-xl border border-gray-200 dark:border-gray-700/20 transition duration-300 hover:shadow-violet-500/30 dark:hover:shadow-emerald-500/30 hover:border-violet-500/30 dark:hover:border-emerald-500/30 cursor-pointer flex flex-col justify-between backdrop-blur-xl"
             onClick={() => setSelectedProject(project)}
           >
             <div>
                 {/* Text color flip */}
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{project.title}</h3>
-                <p className="text-gray-700 dark:text-white mb-4 line-clamp-3">{project.description}</p> 
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3">{project.title}</h3>
+                <p className="text-sm sm:text-base text-gray-700 dark:text-white mb-4 line-clamp-3">{project.description}</p> 
             </div>
             <div className="flex flex-wrap gap-2 mt-4">
               {project.tags.slice(0, 3).map(tag => (
@@ -970,68 +1003,110 @@ const Experience = React.memo(() => (
             </div>
             <div className="mt-4">
                 {/* Button link color flip */}
-                <button className="text-violet-600 dark:text-emerald-400 hover:text-violet-500 dark:hover:text-emerald-300 font-semibold flex items-center space-x-1">
+                <button className="text-violet-600 dark:text-emerald-400 hover:text-violet-500 dark:hover:text-emerald-300 font-semibold flex items-center space-x-1 text-sm">
                     <span>View Details</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </button>
             </div>
           </div>
-        ))}
-      </div>
-    </Section>
-  ));
+    ));
 
-  // --- CONTACT / AI DEMO SECTION - MEMOIZED ---
-  const Contact = React.memo(({ isDark }) => (
-    <Section id="contact" title="Get In Touch & API Demo">
-      <div className="grid md:grid-cols-2 gap-12">
-        <div className="space-y-6">
-          <p className="text-lg text-gray-700 dark:text-white"> 
-            I'm currently seeking new opportunities in Software Development or IT/System Engineering for my next co-op term. Feel free to reach out via email or connect on LinkedIn!
-          </p>
-          <p className="text-sm font-semibold text-gray-500 dark:text-gray-400 border-l-4 pl-3 border-violet-500 dark:border-emerald-500">
-            Below is a functional demonstration of API integration using the Gemini LLM for real-time, grounded technical assistance.
-          </p>
-          <div className="space-y-4">
-            {/* UPDATED: Added mailto: to open default mail app */}
-            <a href="mailto:kelvinchow2014@gmail.com" className="flex items-center space-x-3 text-gray-700 dark:text-white hover:text-violet-600 dark:hover:text-emerald-400 transition">
-              <Send size={20} className="text-violet-600 dark:text-emerald-400" />
-              <span>kelvinchow2014@gmail.com</span>
-            </a>
+  return (
+        <Section id="projects" title="Showcase">
+            <div className="space-y-8">
+                {/* ***MODIFICATION START***
+                  Remove 'max-w-4xl mx-auto' to let the AiAssistantDemo component 
+                  span the full width of the <Section> container, which is max-w-7xl.
+                  This ensures it aligns with the grid below it.
+                */}
+                <div>
+                    <AiAssistantDemo isDark={isDark} />
+                </div>
+                {/* ***MODIFICATION END*** */}
+
+                {/* The rest of the projects flow in a standard 3-column grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    {projectCards}
+                </div>
+            </div>
+        </Section>
+    );
+  });
+
+  // --- CONTACT SECTION - MEMOIZED (Updated to remove LLM demo and improve aesthetics) ---
+const Contact = React.memo(({ isDark }) => (
+    <Section id="contact" title="Get In Touch"> 
+      
+      {/* Container class for single-column, centered look */}
+      <div className="max-w-3xl mx-auto space-y-10">
+        
+        {/* Aesthetic Improvement: Wrap content in a styled card */}
+        <div className="p-8 bg-white/50 dark:bg-gray-900/40 rounded-2xl 
+             border border-gray-200 dark:border-gray-700/20 
+             shadow-2xl backdrop-blur-xl 
+             transition duration-300 
+             hover:shadow-violet-500/40 dark:hover:shadow-emerald-500/40 
+             hover:border-violet-500/40 dark:hover:border-emerald-500/40">
+        
+          <div className="space-y-6">
+            <p className="text-xl font-medium mb-8 text-gray-700 dark:text-white"> 
+              I'm currently seeking new opportunities in **Software Development** or **IT/System Engineering** for my next co-op term. Let's connect and discuss how my skills in automation, data, and system support can benefit your team.
+            </p>
             
-            <div className="flex flex-wrap gap-4 items-center">
-                {/* Social Links */}
-                <a href="https://github.com/kelvinchow2003" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-violet-600 dark:hover:text-emerald-400 transition">
-                  <Github size={24} />
-                </a>
-                <a href="https://www.linkedin.com/in/kelchow/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-violet-600 dark:hover:text-emerald-400 transition">
-                  <LinkedIn size={24} /> 
-                </a>
-                
-                {/* NEW: Download Resume Button */}
-                <a
-                  href="./Resume - Kelvin Chow.pdf" 
-                  download="Resume - Kelvin Chow.pdf"
-                  className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold bg-violet-600/90 dark:bg-emerald-600/80 text-white rounded-full shadow-lg hover:bg-violet-500/90 dark:hover:bg-emerald-500/90 transition duration-300 transform hover:scale-[1.02] active:scale-95 shadow-violet-500/50 dark:shadow-emerald-500/50 border border-violet-500/50 dark:border-emerald-500/50 backdrop-blur-sm"
-                >
-                  <Download size={18} />
-                  <span>Download Resume</span>
-                </a>
+            <h4 className="text-2xl font-bold text-gray-900 dark:text-white border-b pb-2 mb-4 border-gray-200 dark:border-gray-700/50">Contact Details</h4>
+
+            <div className="space-y-4">
+              {/* Aesthetic Improvement: Make email link a prominent button/block */}
+              <a 
+                href="mailto:kelvinchow2014@gmail.com" 
+                className="flex items-center justify-center space-x-3 w-full px-6 py-4 text-lg font-bold 
+                           bg-violet-600/90 dark:bg-emerald-600/80 text-white rounded-xl shadow-lg 
+                           hover:bg-violet-500/90 dark:hover:bg-emerald-500/90 transition duration-300 
+                           transform hover:scale-[1.01] active:scale-95 
+                           shadow-violet-500/50 dark:shadow-emerald-500/50 border border-violet-500/50 dark:border-emerald-500/50 backdrop-blur-sm"
+              >
+                <Send size={24} />
+                <span>kelvinchow2014@gmail.com</span>
+              </a>
+              
+              <div className="flex flex-wrap gap-4 items-center pt-4 justify-center md:justify-start">
+                  {/* Social Links */}
+                  <a href="https://github.com/kelvinchow2003" target="_blank" rel="noopener noreferrer" 
+                     className="p-3 text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-800/50 rounded-full hover:text-violet-600 dark:hover:text-emerald-400 transition shadow-md hover:shadow-lg transform hover:scale-105"
+                     aria-label="GitHub Profile">
+                    <Github size={24} />
+                  </a>
+                  <a href="https://www.linkedin.com/in/kelchow/" target="_blank" rel="noopener noreferrer" 
+                     className="p-3 text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-800/50 rounded-full hover:text-violet-600 dark:hover:text-emerald-400 transition shadow-md hover:shadow-lg transform hover:scale-105"
+                     aria-label="LinkedIn Profile">
+                    <LinkedIn size={24} /> 
+                  </a>
+                  
+                  {/* Download Resume Button - Changed to use a neutral color for contrast */}
+                  <a
+                    href="./Resume - Kelvin Chow.pdf" 
+                    download="Resume - Kelvin Chow.pdf"
+                    className="flex items-center space-x-2 px-6 py-3 text-base font-semibold 
+                               bg-gray-700/90 dark:bg-gray-700/80 text-white rounded-full shadow-lg 
+                               hover:bg-gray-600/90 dark:hover:bg-gray-600/90 transition duration-300 
+                               transform hover:scale-[1.02] active:scale-95 border border-gray-500/50 backdrop-blur-sm"
+                  >
+                    <Download size={20} />
+                    <span>Download Resume</span>
+                  </a>
+              </div>
             </div>
           </div>
         </div>
-        
-        {/* API Integration Demo Component */}
-        <AiAssistantDemo isDark={isDark} />
       </div>
     </Section>
   ));
-
   // --- FOOTER - MEMOIZED ---
   const Footer = React.memo(() => (
-    <footer className="bg-white/50 dark:bg-gray-900/10 border-t border-gray-200 dark:border-gray-800/20 py-8 px-6 sm:px-10 lg:px-20 backdrop-blur-md">
+    // **MOBILE FIX: Reduced padding on mobile**
+    <footer className="bg-white/50 dark:bg-gray-900/10 border-t border-gray-200 dark:border-gray-800/20 py-6 sm:py-8 px-4 sm:px-10 lg:px-20 backdrop-blur-md">
       {/* Footer text color flip */}
-      <div className="max-w-7xl mx-auto text-center text-sm text-gray-500 dark:text-gray-500">
+      <div className="max-w-7xl mx-auto text-center text-xs sm:text-sm text-gray-500 dark:text-gray-500">
         <p>&copy; {new Date().getFullYear()} Kelvin Chow. Built with React and Tailwind CSS. All rights reserved.</p>
       </div>
     </footer>
@@ -1045,13 +1120,14 @@ const Experience = React.memo(() => (
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-violet-900/10 to-indigo-900/10 dark:from-emerald-900/20 dark:to-cyan-900/20 transition-colors duration-500"></div>
 
         <Header />
-        <main className="pt-20 relative z-10">
+        {/* **MOBILE FIX: Reduced top padding on main content on small screens** */}
+        <main className="pt-16 sm:pt-20 relative z-10">
             <Hero />
             <About />
             <Skills />
             <Experience />
-            <Projects />
-            <Contact isDark={isDark} /> {/* PASSED PROP isDark */}
+            <Projects isDark={isDark} /> 
+            <Contact /> 
         </main>
         <Footer />
 
