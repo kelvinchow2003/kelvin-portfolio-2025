@@ -204,12 +204,12 @@ const ProjectModal = ({ project, onClose, isDark }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/70 dark:bg-white/70 backdrop-blur-lg transition-opacity duration-300"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/80 dark:bg-gray-900/80 backdrop-blur-lg transition-opacity duration-300"
       onClick={onClose}
     >
       <div
         // **MOBILE FIX: Use smaller padding on the modal content on mobile**
-        className="relative w-full max-w-4xl p-6 sm:p-8 bg-white/10 dark:bg-gray-800/90 rounded-2xl shadow-2xl transform scale-95 md:scale-100 transition-transform duration-300 border border-violet-500/30 dark:border-emerald-500/30 backdrop-blur-2xl"
+        className="relative w-full max-w-4xl p-6 sm:p-8 bg-white/80 dark:bg-gray-800/90 rounded-2xl shadow-2xl transform scale-95 md:scale-100 transition-transform duration-300 border border-violet-500/30 dark:border-emerald-500/30 backdrop-blur-2xl"
         onClick={(e) => e.stopPropagation()} 
       >
         <button
@@ -220,8 +220,8 @@ const ProjectModal = ({ project, onClose, isDark }) => {
           <X size={24} />
         </button>
 
-        <h3 className="text-3xl font-bold text-white dark:text-gray-900 mb-4">{project.title}</h3>
-        <p className="text-lg text-gray-200 dark:text-gray-800 mb-6">{project.description}</p> 
+        <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{project.title}</h3>
+        <p className="text-lg text-gray-800 dark:text-gray-200 mb-6">{project.description}</p> 
 
         <div className="flex flex-wrap gap-2 mb-8">
           {project.tags.map(tag => (
@@ -278,6 +278,7 @@ const ProjectModal = ({ project, onClose, isDark }) => {
   );
 };
 
+// ... (Rest of the file remains the same)
 /**
  * TTS Player Component - MEMOIZED
  */
@@ -744,7 +745,7 @@ const About = React.memo(() => (
              hover:border-violet-500/30 dark:hover:border-emerald-500/30"> {/* <-- NEW CLASSES ADDED */}
           
           <p className="mb-4 text-gray-700 dark:text-white text-base sm:text-lg"> 
-             I am a highly motivated BSc. in Computer Science Co-op student with experience across System Engineering, Cloud Solutions, full-stack development, and data driven projects. My core expertise lies in developing robust automation scripts and leveraging languages like Python, Java, and SQL to solve real-world operational challenges.
+             am a highly motivated BSc. in Computer Science Co-op student with experience across System Engineering, Cloud Solutions, full-stack development, and data driven projects. My core expertise lies in developing robust automation scripts and leveraging languages like Python, Java, and SQL to solve real-world operational challenges.
           </p>I
           <p className="text-gray-700 dark:text-white text-base sm:text-lg"> 
             I excel in environments that demand both technical troubleshooting and strategic software implementation, demonstrated by my work in automating PDF generation (reducing workload by 53%) and implementing secure web portals. I am dedicated to continuous learning, currently pursuing the AWS Data Engineer and Azure AI Engineer certifications.
