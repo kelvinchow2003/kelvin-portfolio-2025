@@ -1000,7 +1000,7 @@ const Contact = React.memo(({ isDark }) => (
         
           <div className="space-y-6">
             <p className="text-xl font-medium mb-8 text-gray-700 dark:text-white"> 
-              I'm currently seeking new opportunities in **Software Development** or **IT/System Engineering** for my next co-op term. Let's connect and discuss how my skills in automation, data, and system support can benefit your team.
+              I'm currently seeking new opportunities in Software Development or IT/System Engineering for my next co-op term. Let's connect and discuss how my skills in automation, data, and system support can benefit your team.
             </p>
             
             <h4 className="text-2xl font-bold text-gray-900 dark:text-white border-b pb-2 mb-4 border-gray-200 dark:border-gray-700/50">Contact Details</h4>
