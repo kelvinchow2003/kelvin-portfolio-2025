@@ -1,6 +1,15 @@
 export const projectsData = [
   {
     id: 1,
+    title: "Come try out my game: Kelvin The Diver",
+    description: "This is a web arcade game inspired by the game 'Dave The Diver' Where the player controls a diver to explore the ocean, collect treasures, and avoid or hunt sea creatures.",
+    tags: ["HTML5", "JavaScript", "GIT"],
+    githubUrl: "https://github.com/kelvinchow2003/Kelvin-The-Diver",
+    liveUrl: "https://kelvinchow2003.github.io/Kelvin-The-Diver/"
+  },
+  
+  {
+    id: 3,
     title: "Income Prediction Model",
     description: "Built income classification models using the Adult Income dataset with 5 ML algorithms (SVM, Logistic Regression, etc.). Handled data cleaning, scaling, and feature selection (RFE). Achieved 84% accuracy with SVM.",
     tags: ["Machine Learning", "Python", "Scikit-learn", "Pandas", "Data Mining"],
@@ -15,14 +24,7 @@ export const projectsData = [
     githubUrl: "",
     liveUrl: "https://sapc.cchifirm.ca/3/clientportal/#/login"
   },
-  {
-    id: 3,
-    title: "Laptop Configuration Automation",
-    description: "Developed a PowerShell-based solution to streamline pre-domain setup for Windows 11 desktops and laptops. Automated critical tasks like system configuration, updates, firewall management, and application deployment, reducing manual setup time.",
-    tags: ["PowerShell", "Automation", "Windows", "IT Operations"],
-    githubUrl: "https://github.com/kelvinchow2003/IT_Automation",
-    liveUrl: "#"
-  },
+  
   {
     id: 4,
     title: "Kiosk Lockdown Configurator",
@@ -31,14 +33,16 @@ export const projectsData = [
     githubUrl: "https://github.com/kelvinchow2003/Kiosk_Setup",
     liveUrl: "#"
   },
+
   {
     id: 5,
-    title: "Falling Trend Stock ETL",
-    description: "Utilizes a stock market api that fetches high volume major top stocks as recommendations for purchasing.",
-    tags: ["Python", "Market API"],
-    githubUrl: "https://github.com/kelvinchow2003/Stock_ETL",
+    title: "Laptop Configuration Automation",
+    description: "Developed a PowerShell-based solution to streamline pre-domain setup for Windows 11 desktops and laptops. Automated critical tasks like system configuration, updates, firewall management, and application deployment, reducing manual setup time.",
+    tags: ["PowerShell", "Automation", "Windows", "IT Operations"],
+    githubUrl: "https://github.com/kelvinchow2003/IT_Automation",
     liveUrl: "#"
   },
+
   {
     id: 6,
     title: "Palette Pilot",
@@ -55,6 +59,15 @@ export const projectsData = [
     githubUrl: "https://github.com/kelvinchow2003/Background-Remover",
     liveUrl: "https://kelvinchow2003.github.io/Background-Remover/"
   },
+  {
+    id: 8,
+    title: "Falling Trend Stock ETL",
+    description: "Utilizes a stock market api that fetches high volume major top stocks as recommendations for purchasing.",
+    tags: ["Python", "Market API"],
+    githubUrl: "https://github.com/kelvinchow2003/Stock_ETL",
+    liveUrl: "#"
+  },
+  
 
   
   
