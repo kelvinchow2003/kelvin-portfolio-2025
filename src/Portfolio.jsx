@@ -745,7 +745,7 @@ const About = React.memo(() => (
              hover:border-violet-500/30 dark:hover:border-emerald-500/30"> {/* <-- NEW CLASSES ADDED */}
           
           <p className="mb-4 text-gray-700 dark:text-white text-base sm:text-lg"> 
-             am a highly motivated BSc. in Computer Science Co-op student with experience across System Engineering, Cloud Solutions, full-stack development, and data driven projects. My core expertise lies in developing robust automation scripts and leveraging languages like Python, Java, and SQL to solve real-world operational challenges.
+             I am a highly motivated BSc. in Computer Science Co-op student with experience across System Engineering, Cloud Solutions, full-stack development, and data driven projects. My core expertise lies in developing robust automation scripts and leveraging languages like Python, Java, and SQL to solve real-world operational challenges.
           </p>I
           <p className="text-gray-700 dark:text-white text-base sm:text-lg"> 
             I excel in environments that demand both technical troubleshooting and strategic software implementation, demonstrated by my work in automating PDF generation (reducing workload by 53%) and implementing secure web portals. I am dedicated to continuous learning, currently pursuing the AWS Data Engineer and Azure AI Engineer certifications.
